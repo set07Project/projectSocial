@@ -12,7 +12,7 @@ export const registerUser = async(req:Request, res:Response) =>{
         const salt = await bcrypt.genSalt(10);
         const harsh = await bcrypt.hash(password, salt)
 
-        const valu = crypto.randomBytes(36).toString("hex")
+        const value = crypto.randomBytes(36).toString("hex")
         // const token = jwt.sign(value, "justRand")
 
         const user = await prisma.authModel.create({
@@ -20,22 +20,22 @@ export const registerUser = async(req:Request, res:Response) =>{
                 userName,
                 email,
                 password: harsh,
-                token:"",
+             token:value
             }
         });
 
         // const tokenID = jwt.sign({id: user.id});
         return res.status(201).json({
-            message: "user Register",
+            message: "user Registered",
             data: user
         })
     } catch (error) {
         return res.status(404).json({
-            message: "please register "
+            message: "error  ",
+            data: error
         })
     }
 }
-
 
 export const signInUser = async(req:Request, res:Response) =>{
     try {
@@ -46,16 +46,16 @@ export const signInUser = async(req:Request, res:Response) =>{
         }) 
 
         if(user){
-            const com = await bcrypt.compare(password)
-            if(com){
-                if(user.verified && user.token !== ""){
+            const check = await bcrypt.compare(password)
+            if(check){
+                if(user.verified && user.token === ""){
                     return res.status(201).json({
                         message:`welcome back ${user.userName}`,
                         data:user.id
                     })
                 }else{
                     return res.status(404).json({
-                        message: "please sign in "
+                        message: "please go and verify "
                     })
                 }
             }
@@ -88,7 +88,7 @@ export const getOneUsers = async(req:Request, res:Response) =>{
         const {authID} = req.params;
 
         const user = await prisma.authModel.findUnique({
-            where:{authID}
+            where:{id:authID}
         }) 
 
         return res.status(200).json({
@@ -108,7 +108,7 @@ export const updateUserInfo = async(req:Request, res:Response) =>{
         const {userName} = req.body;
 
         const user = await prisma.authModel.update({
-            where:{authID},
+            where:{id:authID},
             data:{userName}
         }) 
 
@@ -147,10 +147,10 @@ export const deleteUserInfo = async(req:Request, res:Response) =>{
         const {authID} = req.params;
 
         const user = await prisma.authModel.delete({
-            where:{authID},
+            where:{id:authID},
         }) 
         return res.status(200).json({
-            message:"deleted",
+            message:"user deleted",
             data:user
         })
     } catch (error) {
@@ -163,20 +163,20 @@ export const deleteUserInfo = async(req:Request, res:Response) =>{
 export const verifiedUser = async(req:Request, res:Response)=>{
     try {
  
-        const {token} = req.params;
+        const {authID} = req.params;
+        
+        // const getID = jwt.verified(token, "justRand",(error: any, payload: any)=>{
 
-        const getID = jwt.verified(token, "justRand",(error: any, payload: any)=>{
-
-            if(error){
-                return error
-            }else{
-                return payload.id
-            }
+        //     if(error){
+        //         return error
+        //     }else{
+        //         return payload.id
+        //     }
              
-        })
+        // })
 
         const user = await prisma.authModel.update({
-           where:{id: getID},
+           where:{id:authID},
            data: {
             verified:true,
             token: ""
@@ -190,7 +190,8 @@ export const verifiedUser = async(req:Request, res:Response)=>{
 
     } catch (error) {
        return res.status(404).json({
-        message: "user not verified"
+        message: "error",
+        data: error
        }) 
     }
 }
@@ -205,16 +206,16 @@ export const resetUserPassword = async(req:Request, res:Response)=>{
 
         if (user.verified && user.token === "") {
             const value = crypto.randomBytes(16).toString("hex")
-            const token = jwt.sign(value, "justRand");
+            // const token = jwt.sign(value, "justRand");
             await prisma.authModel.update({
                 where:{id: user.id},
                 data: {
-                    token
+                    token:value
                 }
             })
         }
         return res.status(201).json({
-            message:"password ressets",
+            message:"password can now be changed",
             data: user
         })
     } catch (error) {
@@ -227,26 +228,27 @@ export const resetUserPassword = async(req:Request, res:Response)=>{
 export const changeUserPassword = async(req:Request, res:Response)=>{
     try {
 
-        const {authID, token} = req.params;
+        const {authID} = req.params;
         const {password} = req.body;
 
-        const getID = jwt.verified(token, "justRand", (error: any, payload:any)=>{
-            if(error){
-                return error
-            }else{
-                return payload.id
-            }
-        })
+        // const getID = jwt.verified(token, "justRand", (error: any, payload:any)=>{
+        //     if(error){
+        //         return error
+        //     }else{
+        //         return payload.id
+        //     }
+        // })
         const user = await prisma.authModel.findUnique({
-            where:{id: getID}
+            where:{id: authID}
         })
 
         if(user.verified && user.token !== ""){
         const salt = await bcrypt.genSalt(10);
         const harsh = await bcrypt.hash(password, salt);
+
         await prisma.authModel.update({
             where:{id:authID},
-            data: {password:harsh}
+            data: {password:harsh, token: ""}
         })
         }
 
