@@ -1,5 +1,5 @@
 import { HTTP, mainError } from "./mainError";
-import {Response} from "express"
+import {Request ,  Response , NextFunction} from "express"
 
 export const errFile = (err : mainError , res : Response) => {
      res.status(HTTP.BAD).json({
@@ -12,6 +12,10 @@ export const errFile = (err : mainError , res : Response) => {
     })
 }
 
-export const errHandler = (err : mainError , res : Response) => {
+export const errHandler = (
+    err : mainError ,
+    req : Request, 
+    res : Response ,
+    next : NextFunction) => {
     errFile(err , res )
-}
+};

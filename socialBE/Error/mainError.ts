@@ -30,7 +30,6 @@ export class mainError extends Error {
         if (this.success !== undefined) {
             this.success = args.success
         }
-
-        Error.captureStackTrace(this)
+        Error.captureStackTrace(this);
     }
 }
