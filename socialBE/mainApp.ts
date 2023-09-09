@@ -1,5 +1,7 @@
-import express, { Application, Request, Response } from "express"
+import express, { Application, NextFunction, Request, Response } from "express"
 import cors from "cors"
+import { HTTP, mainError } from "./Error/mainError"
+import { errHandler } from "./Error/errorHandler"
 
 export const mainApp = (app : Application) => {
     app.use(cors())
@@ -20,4 +22,18 @@ export const mainApp = (app : Application) => {
             })
         }
     })
+
+    app.all("*", (req : Request, res : Response, next : NextFunction)=>{
+        next(
+             new mainError({
+                name : "Router Error",
+                message : `This Error is due to router error so check it please ${req.originalUrl} `,
+                success : false,
+                status : HTTP.BAD,
+            })
+        )
+    })
+
+    // app.use(errHandler)
 }
+
