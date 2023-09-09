@@ -10,3 +10,7 @@
 :root{
  color: black;
 }
+
+.scroll-container::-webkit-scrollbar {
+  width: 12px; 
+}

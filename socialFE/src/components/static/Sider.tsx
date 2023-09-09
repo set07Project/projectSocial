@@ -38,8 +38,8 @@ const Sider = () => {
     setStore(!store);
   };
   return (
-    <div className="max-sm:hidden flex flex-col justify-center h-screen px-4 fixed">
-      <div className="flex flex-col items-center h-[75%] w-[40px] justify-between">
+    <div className="max-sm:hidden flex bg-gray-200 flex-col justify-center h-screen px-4 fixed z-30 shadow-lg ">
+      <div className="flex flex-col items-center h-[75%] w-[30px] justify-between">
         <Link to="/chat/profile">
           <div
             onMouseEnter={onAcc}
@@ -128,7 +128,7 @@ const Sider = () => {
         >
           <TbLogout2 className="text-2xl " />
           {log ? (
-            <div className="absolute mt-12 px-1 rounded-md bg-black text-white">
+            <div className="px-[7px] py-[1px] rounded-[3px] bg-gray-500 text-white absolute text-[13px] ml-[90px] mt-[4px]">
               Logout
             </div>
           ) : null}

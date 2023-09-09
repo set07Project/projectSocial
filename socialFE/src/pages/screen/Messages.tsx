@@ -1,8 +1,11 @@
-
 const Messages = () => {
   return (
-    <div>Messages</div>
-  )
-}
+    <div className="w-full h-[1200px] mt-[73px] text-white">
+      <div className="w-full h-auto justify-center items-center flex ">
+        <div className="min-w-[600px] bg-black min-h-[400px]">Messages</div>
+      </div>
+    </div>
+  );
+};
 
-export default Messages
+export default Messages;

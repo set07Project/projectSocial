@@ -8,8 +8,8 @@ import {Link} from "react-router-dom"
 
 const Header = () => {
   return (
-    <div>
-      <div className="flex justify-between px-[35px] py-4 bg-white ">
+    <div className="bg-gray-200">
+      <div className="flex justify-between px-[35px] py-4  max-sm:w-full max-sm:justify-between">
         {/* {logo side} */}
         <div className="leading-4 italic max-sm:text-[12px]">
           <Link to="/chat">
@@ -21,10 +21,10 @@ const Header = () => {
         </div>
         {/* {Navigation side} */}
         <div className="flex items-center justify-center max-md:hidden max-sm:flex">
-          <div className="px-1 py-[1px] rounded-[4px] mr-[45px] max-md:mr-[35px] transition-all duration-300 cursor-pointer  hover:bg-gray-300 max-sm:mr-2 max-sm:ml-[5px] max-sm:text-xs ">
+          <div className="px-1 py-[1px] rounded-[4px] mr-[45px] max-md:mr-[35px] transition-all duration-300 cursor-pointer hover:bg-gray-300 max-sm:mr-2 max-sm:ml-[5px] max-sm:text-xs ">
             <HiHome className="text-3xl p-1 max-sm:text-xl" />
           </div>
-          <div className="flex justify-center items-center px-2  relative py-[2px] rounded-[4px] mr-[45px] max-md:mr-[35px] transition-all duration-300 cursor-pointer  hover:bg-gray-300 max-sm:text-xs max-sm:mr-3">
+          <div className="flex justify-center items-center px-2  relative py-[2px] rounded-[4px] mr-[45px] max-md:mr-[35px] transition-all duration-300 cursor-pointer hover:bg-gray-300 max-sm:text-xs max-sm:mr-3">
             <div>
               <TiMessages className="text-3xl p-1 max-sm:text-xl" />
             </div>
@@ -32,7 +32,7 @@ const Header = () => {
               2
             </div>
           </div>
-          <div className="flex justify-center items-center px-2  max-md:mr-[35px] relative py-[2px] rounded-[4px] mr-[45px] max-sm:mr-3 transition-all duration-300 cursor-pointer  hover:bg-gray-30 max-sm:text-xs ">
+          <div className="flex justify-center items-center px-2  max-md:mr-[35px] relative py-[2px] rounded-[4px] mr-[45px] max-sm:mr-3 transition-all duration-300 cursor-pointer hover:bg-gray-300 max-sm:text-xs ">
             <div>
               <FaUserFriends className="text-3xl p-1 max-sm:text-xl" />
             </div>
@@ -40,14 +40,14 @@ const Header = () => {
               2
             </div>
           </div>
-          <div className="px-1 py-[1px] rounded-[4px] max-md:mr-[35px] mr-[45px]  transition-all duration-300 cursor-pointer  hover:bg-gray-300 max-sm:text-xs max-sm:mr-3">
+          <div className="px-1 py-[1px] rounded-[4px] max-md:mr-[35px] mr-[45px]  transition-all duration-300 cursor-pointer hover:bg-gray-300 max-sm:text-xs max-sm:mr-3">
             <FaStore className="text-3xl p-1 max-sm:text-xl" />
           </div>
-          <div className="px-1 py-[1px] rounded-[4px] mr-[45px] max-md:mr-[35px] max-sm:text-xs transition-all duration-300 cursor-pointer  hover:bg-gray-300 max-sm:mr-3">
+          <div className="px-1 py-[1px] rounded-[4px] mr-[45px] max-md:mr-[35px] max-sm:text-xs transition-all duration-300 cursor-pointer hover:bg-gray-300 max-sm:mr-3">
             <FcAdvertising className="text-3xl p-1 text-black max-sm:text-xl" />
           </div>
           <div className="flex">
-            <div className="flex justify-center max-md:mr-[35px] items-center px-1 max-sm:text-xs relative py-[1px] rounded-[4px] mr-[45px]  transition-all duration-300 cursor-pointer  hover:bg-gray-300 max-sm:mr-3">
+            <div className="flex justify-center max-md:mr-[35px] items-center px-1 max-sm:text-xs relative py-[1px] rounded-[4px] mr-[45px]  transition-all duration-300 cursor-pointer hover:bg-gray-300 max-sm:mr-3">
               <div>
                 <IoMdNotifications className="text-3xl p-1 max-sm:text-xl" />
               </div>
