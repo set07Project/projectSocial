@@ -6,6 +6,7 @@ const MainScreen = () => {
       <div>MainScreen</div>
       <div>MainScreen</div>
       <div>MainScreen</div>
+      
     </div>
     </div>
   )
