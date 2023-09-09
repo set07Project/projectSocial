@@ -2,10 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  margin: 0;
+@font-face {
+  font-family: Poppin;
+  src: url(/fonts/Poppins-Regular.ttf);
 }
 
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+:root{
+ color: black;
 }
