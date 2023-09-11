@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express"
+import { Request, Response } from "express"
 import {PrismaClient} from "@prisma/client"
 import bcrypt from "bcrypt"
 import crypto from "crypto"
@@ -24,6 +24,7 @@ export const registerUser = async(req:Request, res:Response) =>{
             }
         });
 
+       
         // const tokenID = jwt.sign({id: user.id});
         return res.status(201).json({
             message: "user Registered",
@@ -39,14 +40,14 @@ export const registerUser = async(req:Request, res:Response) =>{
 
 export const signInUser = async(req:Request, res:Response) =>{
     try {
-        const {email, password} = req.body;
+        const {email, password}:any = req.body;
 
         const user = await prisma.authModel.findUnique({
-          where:{email}
-        }) 
+            where : {email}
+        })
 
         if(user){
-            const check = await bcrypt.compare(password)
+            const check = await bcrypt.compare(password, user.password)
             if(check){
                 if(user.verified && user.token === ""){
                     return res.status(201).json({
@@ -127,9 +128,8 @@ export const updateAvatar = async(req:Request, res:Response) =>{
     try {
         const {authID} = req.params;
 
-        const user = await prisma.authModel.update({
-            where:{authID},
-          
+        const user = await prisma.authModel.findUnique({
+            where:{id:authID}
         }) 
         return res.status(201).json({
             message:"profile updated",
@@ -204,11 +204,11 @@ export const resetUserPassword = async(req:Request, res:Response)=>{
             where: {email}
         })
 
-        if (user.verified && user.token === "") {
+        if (user?.verified && user?.token === "") {
             const value = crypto.randomBytes(16).toString("hex")
             // const token = jwt.sign(value, "justRand");
             await prisma.authModel.update({
-                where:{id: user.id},
+                where:{id: user?.id},
                 data: {
                     token:value
                 }
@@ -242,7 +242,7 @@ export const changeUserPassword = async(req:Request, res:Response)=>{
             where:{id: authID}
         })
 
-        if(user.verified && user.token !== ""){
+        if(user?.verified && user?.token !== ""){
         const salt = await bcrypt.genSalt(10);
         const harsh = await bcrypt.hash(password, salt);
 

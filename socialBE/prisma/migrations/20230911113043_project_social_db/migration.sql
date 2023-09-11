@@ -12,3 +12,17 @@ CREATE TABLE "authModel" (
 
     CONSTRAINT "authModel_pkey" PRIMARY KEY ("id")
 );
+
+-- CreateTable
+CREATE TABLE "postModel" (
+    "id" TEXT NOT NULL,
+    "post" TEXT NOT NULL,
+    "avatar" TEXT,
+    "avatarID" TEXT,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "postModel_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateIndex
+CREATE UNIQUE INDEX "authModel_email_key" ON "authModel"("email");
