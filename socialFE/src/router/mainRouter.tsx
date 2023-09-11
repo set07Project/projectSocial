@@ -9,6 +9,7 @@ import Notification from "../pages/screen/Notification"
 import Reels from "../pages/screen/Reels"
 import Messages from "../pages/screen/Messages"
 import Store from "../pages/screen/Store"
+import Ads from "../pages/screen/Ads"
 
 
 export const mainRouter = createBrowserRouter([
@@ -41,6 +42,10 @@ export const mainRouter = createBrowserRouter([
             {
                 path: "/chat/reels",
                 element: <Reels/>
+            },
+            {
+                path: "/chat/ads",
+                element: <Ads/>
             },
             {
                 path: "/chat/messages",
