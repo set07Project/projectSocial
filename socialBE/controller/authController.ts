@@ -128,7 +128,7 @@ export const updateAvatar = async(req:Request, res:Response) =>{
         const {authID} = req.params;
 
         const user = await prisma.authModel.update({
-            where:{authID},
+            where:{id:authID},
           
         }) 
         return res.status(201).json({
