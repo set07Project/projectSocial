@@ -7,16 +7,19 @@ const app : Application = express()
 
 mainApp(app)
 
-const server = app.listen(port , ()=>{
+const server = app.listen(process.env.PORT || port , ()=>{
     console.log("Server is up and Running")
 })
 
-process.on("uncaughtException" , (error)=>{
+process.on("unhandledRejection" , (error : any)=>{
+    console.log(`Server is Shutting down due to unhandledRejection : ${error}`);
+    
     console.log(error);
     process.exit(1)
 })
 
-process.on("unhandledRejection" , (reason) => {
+process.on("uncaughtException" , (reason : any) => {
+    console.log(`Server is Shutting down due to uncaughtException : ${reason}`);
     console.log(reason);
     server.close(()=>{
         process.exit(1)
