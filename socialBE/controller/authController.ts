@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express"
+import { Request, Response } from "express"
 import {PrismaClient} from "@prisma/client"
 import bcrypt from "bcrypt"
 import crypto from "crypto"
@@ -46,7 +46,7 @@ export const signInUser = async(req:Request, res:Response) =>{
         }) 
 
         if(user){
-            const check = await bcrypt.compare(password)
+            const check = await bcrypt.compare(password, user.password)
             if(check){
                 if(user.verified && user.token === ""){
                     return res.status(201).json({
