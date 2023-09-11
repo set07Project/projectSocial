@@ -25,3 +25,14 @@ model authModel{
 
   createdAt DateTime @default(now())
 }
+
+model postModel {
+  id String @id @default(uuid())
+
+  post String
+
+  avatar String?
+  avatarID String?
+
+  createdAt DateTime @default(now())
+}
