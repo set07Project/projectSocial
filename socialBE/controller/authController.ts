@@ -24,6 +24,7 @@ export const registerUser = async(req:Request, res:Response) =>{
             }
         });
 
+       
         // const tokenID = jwt.sign({id: user.id});
         return res.status(201).json({
             message: "user Registered",
