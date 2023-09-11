@@ -3,12 +3,14 @@ import cors from "cors"
 import { HTTP, mainError } from "./Error/mainError"
 import { errHandler } from "./Error/errorHandler"
 import user from "./router/authRouter"
+import morgan from "morgan"
 
 export const mainApp = (app : Application) => {
     app.use(cors())
     app.use(express.json())
 
     app.set("view engine", "ejs")
+    // app.use(morgan("dev"))
 
     app.use("/api/v1", user)
 
