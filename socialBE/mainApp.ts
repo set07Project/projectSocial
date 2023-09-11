@@ -2,12 +2,15 @@ import express, { Application, NextFunction, Request, Response } from "express"
 import cors from "cors"
 import { HTTP, mainError } from "./Error/mainError"
 import { errHandler } from "./Error/errorHandler"
+import user from "./router/authRouter"
 
 export const mainApp = (app : Application) => {
     app.use(cors())
     app.use(express.json())
 
     app.set("view engine", "ejs")
+
+    app.use("/api/v1", user)
 
     app.get("/", (req : Request, res: Response) =>{
         try {
