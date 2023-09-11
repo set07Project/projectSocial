@@ -1,10 +1,11 @@
-import { error } from "console"
 import express, {Application} from "express"
+import { mainApp } from "./mainApp"
 
 const port : number = 1234
 
 const app : Application = express()
 
+mainApp(app)
 
 const server = app.listen(port , ()=>{
     console.log("Server is up and Running")
