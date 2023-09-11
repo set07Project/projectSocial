@@ -34,6 +34,6 @@ export const mainApp = (app : Application) => {
         )
     })
 
-    // app.use(errHandler)
+    app.use(errHandler)
 }
 
