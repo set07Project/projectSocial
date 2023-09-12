@@ -24,7 +24,6 @@ export const registerUser = async(req:Request, res:Response) =>{
             }
         });
 
-       
         // const tokenID = jwt.sign({id: user.id});
         return res.status(201).json({
             message: "user Registered",
@@ -79,7 +78,8 @@ export const getAllUsers = async(req:Request, res:Response) =>{
         })
     } catch (error) {
         return res.status(404).json({
-            message: "can't read users "
+            message: "can't read users ",
+            data : error
         })
     }
 }
@@ -205,19 +205,19 @@ export const resetUserPassword = async(req:Request, res:Response)=>{
         })
 
         if (user?.verified && user?.token === "") {
-            const value = crypto.randomBytes(16).toString("hex")
+            const token = crypto.randomBytes(32).toString("hex")
             // const token = jwt.sign(value, "justRand");
             await prisma.authModel.update({
                 where:{id: user?.id},
                 data: {
-                    token:value
+                    token
                 }
             })
+            return res.status(201).json({
+                message:"password can now be changed",
+                data: user
+            })
         }
-        return res.status(201).json({
-            message:"password can now be changed",
-            data: user
-        })
     } catch (error) {
         return res.status(404).json({
             message: "can't reset password"
