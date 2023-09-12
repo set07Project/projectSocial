@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import { HTTP } from "../Error/mainError";
 
 
-const prisma = new PrismaClient
+const prisma = new PrismaClient()
 
 export const createPost = async (req : Request, res : Response) =>{
     try {
