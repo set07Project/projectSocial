@@ -39,7 +39,9 @@ export const createUser = async (req: Request, res: Response) => {
 
 export const viewUsers = async (req: Request, res: Response) => {
   try {
-    const user = await prisma.authModel.findMany({});
+    const user = await prisma.authModel.findMany({
+      include : {post : true}
+    });
     return res.status(HTTP.OK).json({
       message: "users viewed Succefully",
       data: user,
@@ -58,6 +60,7 @@ export const viewUser = async (req: Request, res: Response) => {
 
     const user = await prisma.authModel.findUnique({
       where: { id: authID },
+      include : {post : true}
     });
     return res.status(HTTP.OK).json({
       message: "user viewed Succefully",
@@ -91,18 +94,18 @@ export const deleteUser = async (req: Request, res: Response) => {
 
 export const verifyUser = async (req: Request, res: Response) => {
   try {
-    const { token } = req.params;
+    const { userID } = req.params;
 
-    const getID : any = jwt.verify(token, "secret", (err, payload: any)=>{
-        if(err){
-            return err;
-        }else{
-            return payload
-        }
-    })
+    // const getID : any = jwt.verify(token, "secret", (err, payload: any)=>{
+    //     if(err){
+    //         return err;
+    //     }else{
+    //         return payload
+    //     }
+    // })
 
     const user = await prisma.authModel.update({
-      where: { id: getID },
+      where: { id: userID },
       data: {
         token: "",
         verified: true,
