@@ -10,6 +10,8 @@ import Reels from "../pages/screen/Reels"
 import Messages from "../pages/screen/Messages"
 import Store from "../pages/screen/Store"
 import Ads from "../pages/screen/Ads"
+import RegisterScreen from "../pages/auth/RegisterScreen"
+import SigninScreen from "../pages/auth/SigninScreen"
 
 
 export const mainRouter = createBrowserRouter([
@@ -60,5 +62,13 @@ export const mainRouter = createBrowserRouter([
     {
         path: "*",
         element: <Error/>
-    }
+    },
+    {
+        path: "/sign-up",
+        element: <RegisterScreen/>
+    },
+    {
+        path: "/sign-in",
+        element: <SigninScreen/>
+    },
 ])

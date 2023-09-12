@@ -1,7 +1,7 @@
 import { TiMessages } from "react-icons/Ti";
 import { FaUserFriends, FaStore } from "react-icons/fa";
 import { HiHome } from "react-icons/hi";
-import { FcAdvertising } from "react-icons/fc";
+import { MdGroups } from "react-icons/md";
 import { IoMdNotifications } from "react-icons/io";
 import { AiOutlineDown } from "react-icons/ai";
 import {Link} from "react-router-dom"
@@ -68,7 +68,7 @@ window.addEventListener("scroll", onScroll)
            </Link>
             <Link to="/chat/ads">
             <div className="px-1 py-[1px] rounded-[4px] mr-[45px] max-md:mr-[35px] max-sm:text-xs transition-all duration-300 cursor-pointer hover:bg-gray-300 max-sm:mr-3">
-              <FcAdvertising className="text-3xl p-1 text-black max-sm:text-xl" />
+              <MdGroups className="text-3xl p-1 text-black max-sm:text-xl" />
             </div>
             </Link>
             <div className="flex">
@@ -142,7 +142,7 @@ window.addEventListener("scroll", onScroll)
           </Link>
           <Link to="/chat/ads">
           <div className="px-1 py-[1px] rounded-[4px] mr-[45px] max-md:mr-[35px] max-sm:text-xs transition-all duration-300 cursor-pointer hover:bg-gray-300 max-sm:mr-3">
-            <FcAdvertising className="text-3xl p-1 text-black max-sm:text-xl" />
+            <MdGroups className="text-3xl p-1 text-black max-sm:text-xl" />
           </div>
           </Link>
           <div className="flex">
