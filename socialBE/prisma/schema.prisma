@@ -23,6 +23,8 @@ model authModel{
   token String
   verified Boolean @default(false)
 
+  post postModel[]
+
   createdAt DateTime @default(now())
 }
 
@@ -31,8 +33,26 @@ model postModel {
 
   post String
 
-  avatar String?
-  avatarID String?
+  avatar String
+  avatarID String
+
+  userID String
+
+  user authModel @relation(fields: [userID], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  commented commentModel[]
+
+  createdAt DateTime @default(now())
+}
+
+model commentModel {
+  id String @id @default(uuid())
+
+  comments String
+
+  postID String
+
+  user postModel @relation(fields: [postID], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   createdAt DateTime @default(now())
 }

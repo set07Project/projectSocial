@@ -9,7 +9,7 @@ router.route("/:authID/viewUser").get(viewUser)
 router.route("/createUser").post(createUser)
 router.route("/signInUser").post(signInUser)
 
-router.route("/:token/verifyUser").patch(verifyUser)
+router.route("/:userID/verifyUser").patch(verifyUser)
 router.route("/:authID/updateUserName").patch(updateUserName)
 router.route("/:authID/updateUserAvatar").patch(updateUserAvatar)
 router.route("/resetPassword").patch(resetAccountPassword)
