@@ -1,5 +1,6 @@
 import Blog from "../../components/private/Blog";
 import Mind from "../../components/private/Mind";
+import VideoPart from "../../components/private/VideoPart";
 
 const MainScreen = () => {
   return (
@@ -11,6 +12,7 @@ const MainScreen = () => {
         </div>
         <div className="min-w-[580px] max-sm:min-w-[300px] px-2 max-sm:ml-[5px] mt-2 ">
           <Mind />
+          <VideoPart/>
           <div className="h-[300vh]  w-[20px] ml-[300px]">
           </div>
         </div>
