@@ -3,8 +3,9 @@ import { Request, Response } from "express";
 import { HTTP } from "../Error/mainError";
 import crypto from "crypto";
 import bcrypt from "bcrypt";
-import cloudinary from "../utils/cloudinary";
 import jwt from "jsonwebtoken"
+import {uploadStream} from ".././utils/uploadHelper"
+import {role} from ".././utils/role"
 
 const prisma = new PrismaClient();
 
@@ -20,7 +21,7 @@ export const createUser = async (req: Request, res: Response) => {
     const token = jwt.sign(value, "secret")
 
     const user = await prisma.authModel.create({
-      data: { userName, email, password: hash, token },
+      data: { userName, email, password: hash, token, role : role.USER },
     });
 
     // const tokenID = jwt.sign({id : user.id}, "secret")
@@ -94,7 +95,7 @@ export const deleteUser = async (req: Request, res: Response) => {
 
 export const verifyUser = async (req: Request, res: Response) => {
   try {
-    const { userID } = req.params;
+    const { authID } = req.params;
 
     // const getID : any = jwt.verify(token, "secret", (err, payload: any)=>{
     //     if(err){
@@ -105,14 +106,14 @@ export const verifyUser = async (req: Request, res: Response) => {
     // })
 
     const user = await prisma.authModel.update({
-      where: { id: userID },
+      where: { id: authID },
       data: {
         token: "",
         verified: true,
       },
     });
 
-    return res.status(HTTP.OK).json({
+    return res.status(HTTP.CREATED).json({
       message: "user verified Succefully",
       data: user,
     });
@@ -190,9 +191,7 @@ export const updateUserAvatar = async (req: any, res: Response) => {
   try {
     const { authID } = req.params;
 
-    const { secure_url, public_id } = await cloudinary.uploader.upload(
-      req.path.file
-    );
+    const {secure_url, public_id} : any = await uploadStream(req)
 
     const user = await prisma.authModel.update({
       where: { id: authID },

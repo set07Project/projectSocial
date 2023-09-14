@@ -2,6 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import { Request, Response } from "express";
 import { HTTP } from "../Error/mainError";
 import cloudinary from "../utils/cloudinary";
+import {uploadStream} from ".././utils/uploadHelper"
 
 
 const prisma = new PrismaClient()
@@ -16,9 +17,7 @@ export const createPost = async (req : any, res : Response) =>{
             include : {post : true}
         })
 
-        const { secure_url, public_id } = await cloudinary.uploader.upload(
-            req.file.path
-          );
+        const {secure_url, public_id} : any = await uploadStream(req)
 
         if (user?.verified && user.token === "") {
             const posted = await prisma.postModel.create({

@@ -6,8 +6,10 @@ CREATE TABLE "authModel" (
     "password" TEXT NOT NULL,
     "avatar" TEXT,
     "avatarID" TEXT,
-    "token" TEXT NOT NULL,
+    "token" TEXT,
     "verified" BOOLEAN NOT NULL DEFAULT false,
+    "role" TEXT NOT NULL,
+    "roleID" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "authModel_pkey" PRIMARY KEY ("id")
@@ -37,6 +39,9 @@ CREATE TABLE "commentModel" (
 
 -- CreateIndex
 CREATE UNIQUE INDEX "authModel_email_key" ON "authModel"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "authModel_roleID_key" ON "authModel"("roleID");
 
 -- AddForeignKey
 ALTER TABLE "postModel" ADD CONSTRAINT "postModel_userID_fkey" FOREIGN KEY ("userID") REFERENCES "authModel"("id") ON DELETE CASCADE ON UPDATE CASCADE;

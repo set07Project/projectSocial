@@ -20,8 +20,11 @@ model authModel{
   avatar String?
   avatarID String?
 
-  token String
+  token String?
   verified Boolean @default(false)
+
+  role String
+  roleID String? @unique
 
   post postModel[]
 

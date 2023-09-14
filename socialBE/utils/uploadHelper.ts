@@ -1,7 +1,7 @@
 import cloudinary from "./cloudinary"
 import streamifier from "streamifier"
 
-const uploadStream = (req : any) => {
+export const uploadStream = async (req : any) => {
 return new Promise(async(resolve , reject) => {
         let stream = cloudinary.uploader.upload_stream((error : Error , result : any)=>{
             if (result) {
@@ -10,6 +10,6 @@ return new Promise(async(resolve , reject) => {
                 return reject (error)
             }
         });
-        streamifier.createReadStream(req.file.buffer)
+        streamifier.createReadStream(req.file.buffer).pipe(stream)
     })
 }
