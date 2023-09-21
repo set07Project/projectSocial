@@ -1,12 +1,11 @@
-import  { useState } from "react";
+import { useState } from "react";
 import { MdOutlinePublic } from "react-icons/md";
 import { BsFillCaretDownFill } from "react-icons/bs";
-import video from "../../assets/video.mp4";
 import Add from "./Add";
 import Comment from "./Comment";
+import error from "../../assets/Error.png"
 
-
-const VideoPart  = () => {
+const ImagePart = () => {
   const [view, setView] = useState<boolean>(false);
   const onView = () => {
     setView(!view);
@@ -21,7 +20,9 @@ const VideoPart  = () => {
           </div>
           <div className="mb-[-5px]">
             <div className="flex text-[14px] items-center">
-              <div className="mr-2 text-[13px] font-semibold py-[2px]">Francis Uzoigwe</div>{" "}
+              <div className="mr-2 text-[13px] font-semibold py-[2px]">
+                Francis Uzoigwe
+              </div>{" "}
               <div className="text-[11px]">posted an update</div>
             </div>
             <div className="flex mt-[-5px] text-[10px] font-semibold items-center">
@@ -33,7 +34,7 @@ const VideoPart  = () => {
                 }}
               >
                 <MdOutlinePublic className="z-[-20]" />
-                <BsFillCaretDownFill className="ml-1 mt-[3px] text-xs z-[-20]" />
+                <BsFillCaretDownFill className="ml-1 mt-[2px] text-xs z-[-20]" />
                 {view ? (
                   <div className="absolute bg-gray-500 text-white rounded-md flex flex-col mt-[90px] text-[10px] z-[-10]">
                     <div className="px-3 hover:scale-110 duration-300 transition-all">
@@ -43,7 +44,7 @@ const VideoPart  = () => {
                       Private
                     </div>
                     <div className="px-3 hover:scale-110 duration-300 transition-all">
-                      Friends{" "}
+                      Friends
                     </div>
                   </div>
                 ) : null}
@@ -55,20 +56,14 @@ const VideoPart  = () => {
       <div className="mt-5 w-full justify-center flex h-auto">
         <div className="w-[95%] h-[270px] max-sm:h-[200px] border rounded-md z-[-20] flex justify-center items-center overflow-hidden">
           <div className=" z-[-20] w-full h-full flex justify-end">
-            <video
-              src={video}
-              controls
-              muted
-              loop 
-              className="object-cover w-full h-full"
-            />
+            <img src={error} className="object-cover w-full h-full" />
           </div>
         </div>
       </div>
-        <Add/>
-        <Comment/>
+      <Add />
+      <Comment />
     </div>
   );
 };
 
-export default VideoPart;
+export default ImagePart;

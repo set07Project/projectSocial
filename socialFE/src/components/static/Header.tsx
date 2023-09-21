@@ -1,11 +1,12 @@
+import { useState } from "react";
 import { TiMessages } from "react-icons/Ti";
 import { FaUserFriends, FaStore } from "react-icons/fa";
 import { HiHome } from "react-icons/hi";
 import { MdGroups } from "react-icons/md";
 import { IoMdNotifications } from "react-icons/io";
 import { AiOutlineDown } from "react-icons/ai";
+import {SiQuantconnect} from "react-icons/si"
 import {Link} from "react-router-dom"
-import { useState } from "react";
 
 const Header = () => {
 const [scroll, setScroll] = useState<boolean>(false)
@@ -28,7 +29,7 @@ window.addEventListener("scroll", onScroll)
           {/* {logo side} */}
           <div className="leading-4 italic max-sm:text-[12px]">
             <Link to="/chat">
-            <div className="px-1 py-1">Aj</div>
+            <div className="px-1 py-3 items-center flex"><SiQuantconnect className="text-2xl"/></div>
             </Link>
             <div className="hidden max-sm:flex">
               <AiOutlineDown />
@@ -102,7 +103,7 @@ window.addEventListener("scroll", onScroll)
         {/* {logo side} */}
         <div className="leading-4 italic max-sm:text-[12px]">
           <Link to="/chat">
-          <div className="px-1 py-1">Aj</div>
+          <div className="px-1 py-1 items-center flex"><SiQuantconnect className="text-2xl"/></div>
           </Link>
           <div className="hidden max-sm:flex">
             <AiOutlineDown />

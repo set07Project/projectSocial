@@ -1,12 +1,10 @@
-import  { useState } from "react";
+import { useState } from "react";
 import { MdOutlinePublic } from "react-icons/md";
 import { BsFillCaretDownFill } from "react-icons/bs";
-import video from "../../assets/video.mp4";
-import Add from "./Add";
-import Comment from "./Comment";
+import JoinDiscussion from "./JoinDiscussion";
+import { SlLike } from "react-icons/sl";
 
-
-const VideoPart  = () => {
+const TextPart = () => {
   const [view, setView] = useState<boolean>(false);
   const onView = () => {
     setView(!view);
@@ -21,8 +19,15 @@ const VideoPart  = () => {
           </div>
           <div className="mb-[-5px]">
             <div className="flex text-[14px] items-center">
-              <div className="mr-2 text-[13px] font-semibold py-[2px]">Francis Uzoigwe</div>{" "}
-              <div className="text-[11px]">posted an update</div>
+              <div className="mr-2 text-[13px] font-semibold py-[2px]">
+                Francis Uzoigwe
+              </div>{" "}
+              <div className="text-[11px] flex-wrap">
+                started a discussion{" "}
+                <span className="font-black text-[12px]">
+                  {/* {Coding and it's merits} */}
+                </span>
+              </div>
             </div>
             <div className="flex mt-[-5px] text-[10px] font-semibold items-center">
               2 years ago.{" "}
@@ -33,9 +38,9 @@ const VideoPart  = () => {
                 }}
               >
                 <MdOutlinePublic className="z-[-20]" />
-                <BsFillCaretDownFill className="ml-1 mt-[3px] text-xs z-[-20]" />
+                <BsFillCaretDownFill className="ml-1 mt-[2px] text-xs z-[-20]" />
                 {view ? (
-                  <div className="absolute bg-gray-500 text-white rounded-md flex flex-col mt-[90px] text-[10px] z-[-10]">
+                  <div className="absolute bg-gray-500 text-white rounded-md flex flex-col mt-[90px] text-[10px] ">
                     <div className="px-3 hover:scale-110 duration-300 transition-all">
                       Public
                     </div>
@@ -54,21 +59,22 @@ const VideoPart  = () => {
       </div>
       <div className="mt-5 w-full justify-center flex h-auto">
         <div className="w-[95%] h-[270px] max-sm:h-[200px] border rounded-md z-[-20] flex justify-center items-center overflow-hidden">
-          <div className=" z-[-20] w-full h-full flex justify-end">
-            <video
-              src={video}
-              controls
-              muted
-              loop 
-              className="object-cover w-full h-full"
-            />
+          <div className=" z-[-20] w-full h-full flex justify-end"></div>
+        </div>
+      </div>
+      <JoinDiscussion />
+      <div className="w-full flex justify-center py-2">
+        <div className="w-[95%]">
+          <div className="flex">
+            <div className="mr-2 pl-2">
+              <SlLike />
+            </div>
+            <div className="text-[12px]">Like</div>
           </div>
         </div>
       </div>
-        <Add/>
-        <Comment/>
     </div>
   );
 };
 
-export default VideoPart;
+export default TextPart;
