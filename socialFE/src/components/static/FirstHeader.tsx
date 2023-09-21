@@ -33,7 +33,8 @@ const FirstHeader = () => {
           </button>
         </div>
       </div>
-    </div> :  <div className="w-full h-[60px] bg-purple-600 flex justify-center items-center transition-all duration-300 text-white fixed ">
+    </div> :  <div className="w-full h-[60px] bg-purple-600 flex justify-center items-center 
+    transition-all duration-300 text-white fixed ">
         <div className="flex justify-between items-center w-[95%]  ">
           <div className=" flex items-center">
             <SiQuantconnect className="text-3xl max-sm:text-2xl" />
