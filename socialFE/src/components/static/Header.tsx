@@ -29,7 +29,7 @@ window.addEventListener("scroll", onScroll)
           {/* {logo side} */}
           <div className="leading-4 italic max-sm:text-[12px]">
             <Link to="/chat">
-            <div className="px-1 py-3 items-center flex"><SiQuantconnect className="text-2xl"/></div>
+            <div className="px-1 py-3 items-center flex"><SiQuantconnect className="text-2xl max-sm:text-xl"/></div>
             </Link>
             <div className="hidden max-sm:flex">
               <AiOutlineDown />
@@ -87,7 +87,7 @@ window.addEventListener("scroll", onScroll)
           </div>
           <div className="flex px-2 rounded-md py-1 items-center hover:bg-slate-300 cursor-pointer duration-300 transition-all max-sm:hidden">
             <div className="py-[2px] px-[2px] font-Poppin text-[14px] mr-2 font-semibold max-sm:text-[12px]">
-            francis
+            AjConnect
             </div>
             <div>
               <img
@@ -103,7 +103,7 @@ window.addEventListener("scroll", onScroll)
         {/* {logo side} */}
         <div className="leading-4 italic max-sm:text-[12px]">
           <Link to="/chat">
-          <div className="px-1 py-1 items-center flex"><SiQuantconnect className="text-2xl"/></div>
+          <div className="px-1 py-1 items-center flex"><SiQuantconnect className="text-2xl max-sm:text-xl"/></div>
           </Link>
           <div className="hidden max-sm:flex">
             <AiOutlineDown />
@@ -161,7 +161,7 @@ window.addEventListener("scroll", onScroll)
         </div>
         <div className="flex px-2 rounded-md py-1 items-center hover:bg-slate-300 cursor-pointer duration-300 transition-all max-sm:hidden">
           <div className="py-[2px] px-[2px] font-Poppin text-[14px] mr-2 font-semibold max-sm:text-[12px]">
-          francis
+          AjConnect
           </div>
           <div>
             <img
