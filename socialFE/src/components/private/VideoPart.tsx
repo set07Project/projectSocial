@@ -1,12 +1,11 @@
-import  { useState } from "react";
+import { useState } from "react";
 import { MdOutlinePublic } from "react-icons/md";
 import { BsFillCaretDownFill } from "react-icons/bs";
 import video from "../../assets/video.mp4";
 import Add from "./Add";
 import Comment from "./Comment";
 
-
-const VideoPart  = () => {
+const VideoPart = () => {
   const [view, setView] = useState<boolean>(false);
   const onView = () => {
     setView(!view);
@@ -21,7 +20,9 @@ const VideoPart  = () => {
           </div>
           <div className="mb-[-5px]">
             <div className="flex text-[14px] items-center">
-              <div className="mr-2 text-[13px] font-semibold py-[2px]">Francis Uzoigwe</div>{" "}
+              <div className="mr-2 text-[13px] font-semibold py-[2px]">
+                Francis Uzoigwe
+              </div>{" "}
               <div className="text-[11px]">posted an update</div>
             </div>
             <div className="flex mt-[-5px] text-[10px] font-semibold items-center">
@@ -53,20 +54,20 @@ const VideoPart  = () => {
         </div>
       </div>
       <div className="mt-5 w-full justify-center flex h-auto">
-        <div className="w-[95%] h-[270px] max-sm:h-[200px] border rounded-md z-[-20] flex justify-center items-center overflow-hidden">
-          <div className=" z-[-20] w-full h-full flex justify-end">
+        {/* <div className="w-[95%] h-[270px] max-sm:h-[200px] border rounded-md z-[-20] flex justify-center items-center overflow-hidden"> */}
+          {/* <div className=" z-[-20] w-full h-full flex justify-end bg-black"> */}
             <video
               src={video}
               controls
               muted
-              loop 
-              className="object-cover w-full h-full"
+              // loop
+              className="object-cover w-[95%] rounded-lg h-full z-[1]"
             />
-          </div>
-        </div>
+          {/* </div> */}
+        {/* </div> */}
       </div>
-        <Add/>
-        <Comment/>
+      <Add />
+      <Comment />
     </div>
   );
 };

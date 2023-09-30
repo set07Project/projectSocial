@@ -27,7 +27,7 @@ const FirstHeader = () => {
   return (
     <div>
       {scroll ? (
-        <div className="w-full h-[60px] bg-white  shadow-sm transition-all duration-300 flex justify-center items-center text-white fixed ">
+        <div className="w-full h-[60px] bg-white z-50 shadow-sm transition-all duration-300 flex justify-center items-center text-white fixed ">
           <div className="flex justify-between items-center w-[95%]  ">
             <div className=" flex items-center">
               <SiQuantconnect className="text-3xl text-purple-600 max-sm:text-2xl" />
@@ -54,7 +54,7 @@ const FirstHeader = () => {
         </div>
       ) : (
         <div
-          className="w-full h-[60px] bg-purple-600 flex justify-center items-center 
+          className="w-full h-[60px] bg-purple-600 z-50 flex justify-center items-center 
     transition-all duration-300 text-white fixed "
         >
           <div className="flex justify-between items-center w-[95%]  ">
