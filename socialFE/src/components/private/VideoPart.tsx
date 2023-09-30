@@ -53,6 +53,7 @@ const VideoPart = () => {
           </div>
         </div>
       </div>
+      
       <div className="mt-5 w-full justify-center flex h-auto">
         {/* <div className="w-[95%] h-[270px] max-sm:h-[200px] border rounded-md z-[-20] flex justify-center items-center overflow-hidden"> */}
           {/* <div className=" z-[-20] w-full h-full flex justify-end bg-black"> */}
