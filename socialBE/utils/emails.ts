@@ -3,52 +3,62 @@ import { google } from "googleapis"
 import nodemailer from "nodemailer"
 import path from "path"
 
-const Google_ID = "383228458426-eivffdpod6vurfpvqa5ig20joreqsohb.apps.googleusercontent.com"
-const Google_Refresh_Token = "1//04mSNvC2rZqrPCgYIARAAGAQSNwF-L9IrP2ZJHlCpxI6YaFAxF1LuN8Yz8pTInEpUAHPVddc3qHORgsJG0tJySHJbz5VX-BttNXk"
-const Google_URl = "https://developers.google.com/oauthplayground"
-const Google_SECRET = "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"
+const GOOGLE_ID =
+  "83509147636-ncej2dav18r4ncpd6o4vkk9a7u9o5ujl.apps.googleusercontent.com";
+const GOOGLE_SECRET = "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";
+const GOOGLE_REFRESH_TOKEN =
+  "1//04FiKCxv8yqgrCgYIARAAGAQSNwF-L9Irq-kKiqtvWBSIC0FvcyrtYLc2hMDAztyfQeu6hCcAwSADtf9znZ9pr4YjwTdqn_2xVkg";
+const GOOGLE_URL = "https://developers.google.com/oauthplayground";
 
-const oAuth = new google.auth.OAuth2(Google_ID, Google_URl, Google_SECRET)
-oAuth.setCredentials({access_token : Google_Refresh_Token})
+// const GOOGLE_ID =
+//   "848542784186-9os7noa7qvcg3nckfu38s3bhob8u6oga.apps.googleusercontent.com";
+// const GOOGLE_SECRET = "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";
+// const GOOGLE_REFRESH_TOKEN =
+//   "1//04GgN8ydoI_ZdCgYIARAAGAQSNwF-L9IrKCOkFE95PncupZNTb3WCiygNcFb1vp20oW-1SMJTKzSWxnWw2B6nf4S85GXSTpgR44M";
+// const GOOGLE_URL = "https://developers.google.com/oauthplayground";
 
-const URl : string = "localhost://1234/api/"
+const oAuth = new google.auth.OAuth2(GOOGLE_ID, GOOGLE_SECRET, GOOGLE_URL)
+oAuth.setCredentials({access_token : GOOGLE_REFRESH_TOKEN})
 
-export const verifyAccount = async (user : any, tokenID : string) =>{
+const url = "http://localhost:1234/api"
+
+export const verifyAccount = async (user : any, tokenID : string)=>{
     try {
-        
         const getAccess : any = (await oAuth.getAccessToken()).token
 
         const transport = nodemailer.createTransport({
             service : "gmail",
             auth : {
                 type : "OAuth2",
-                user : "ajConnect@gmail.com",
-                clientId : Google_ID,
-                clientSecret : Google_SECRET,
-                refreshToken : Google_Refresh_Token,
-                accessToken : getAccess
+                // user : "codelabbest@gmail.com",
+                user : "ajconnect801@gmail.com",
+                clientId : GOOGLE_ID,
+                clientSecret : GOOGLE_SECRET,
+                refreshToken : GOOGLE_REFRESH_TOKEN,
+                accessToken : getAccess,
             }
         })
 
-        const DataTobePassedToVerify = {
-            url : `${URl}/${tokenID}/verify`,
-            name : user?.name
+        const userDetails = {
+            name : user.name,
+            url : `${url}/${tokenID}/verify`
         }
 
-        const join = path.join(__dirname, "../views/verifyAccount.ejs")
+        const data = path.join(__dirname, "../views/verifyAccount.ejs")
 
-        const data = await ejs.renderFile(join, DataTobePassedToVerify)
+        const realData = await ejs.renderFile(data, userDetails)
 
         const mail = {
-            from : "Verify Account <ajConnect@gmail.com> ",
-            to : user?.email,
-            subject : "Verify Your Account",
-            html : data
+            from : "verify <ajconnect801@gmail.com>",
+            to : user.email,
+            subject : "verify",
+            html : realData
         }
 
         transport.sendMail(mail)
 
     } catch (error) {
         console.log(error);
+        
     }
 }

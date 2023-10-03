@@ -21,6 +21,6 @@ router.route("/:token/change-password").patch(changePassword)
 router.route("/:token/update-info").patch(updateUserInfo)
 router.route("/:token/update-avatar").patch(myUpload,updateUserAvatar)
 
-router.route("/:token/delete-user").delete(deleteUser)
+router.route("/:userID/delete-user").delete(deleteUser)
 
 export default router
