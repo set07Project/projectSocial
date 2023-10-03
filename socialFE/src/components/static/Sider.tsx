@@ -38,8 +38,8 @@ const Sider = () => {
     setStore(!store);
   };
   return (
-    <div className="max-sm:hidden flex bg-gray-200 flex-col justify-center h-screen px-4 fixed z-30 shadow-lg ">
-      <div className="flex flex-col items-center h-[75%] w-[30px] justify-between">
+    <div className="max-sm:hidden flex bg-[#F3F4F6] flex-col justify-center h-screen px-4 fixed z-30 shadow-lg ">
+      <div className="flex flex-col items-center h-[75%] w-[30px]  justify-between">
         <Link to="/chat/profile">
           <div
             onMouseEnter={onAcc}
@@ -48,10 +48,11 @@ const Sider = () => {
           >
             <CgProfile className="text-2xl relative flex justify-center items-center" />
             {acc ? (
-              <div className="px-[7px] py-[1px] rounded-[3px] bg-gray-500 text-white absolute text-[13px] ml-[25px] mt-[-21px]">
+              <div className="px-[7px] py-[1px] rounded-[3px] bg-gray-500  text-white absolute text-[13px] ml-[25px] mt-[-21px]">
                 Profile
               </div>
             ) : null}
+            
           </div>
         </Link>
         <Link to="/chat/messages">

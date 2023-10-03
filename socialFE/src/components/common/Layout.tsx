@@ -8,18 +8,15 @@ const Layout = () => {
       <div className=" justify-end w-full ">
         <Sider />
         <div className="flex justify-end">
-          <div className=" w-[calc(100vw-72px)] max-sm:w-full fixed  flex flex-col">
+          <div className=" w-[calc(100vw-62px)] max-sm:w-full fixed  flex flex-col max-md:w-[calc(100vw-60px)] max-lg:w-[calc(100vw - 50px)]">
             <Header />
           </div>
-         
         </div>
         <div className="flex justify-end">
-          <div className=" w-[calc(100vw-79px)] max-sm:w-full  flex flex-col">
+          <div className=" w-[calc(100vw-79px)] max-sm:w-full flex top-0 ">
             <Outlet />
           </div>
-         
         </div>
-       
       </div>
     </div>
   );
