@@ -13,6 +13,6 @@ export const streamUpload = async (req : any) =>{
             }
         )
 
-        streamifier.createReadStream(req.file.path).pipe(stream)
+        streamifier.createReadStream(req.file.buffer).pipe(stream)
     })
 }

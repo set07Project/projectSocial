@@ -23,7 +23,21 @@ model authModel {
   token String
   verified Boolean @default(false)
 
-  // posts Json
+  posts postModel[]
+
+  createdAt DateTime @default(now())
+}
+
+model postModel {
+  id String @id @default(uuid())
+
+  message String
+
+  image String
+  imageID String
+
+  userID String
+  user authModel @relation(fields: [userID], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   createdAt DateTime @default(now())
 }
