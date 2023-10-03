@@ -1,6 +1,6 @@
 import {createBrowserRouter} from "react-router-dom"
 import FirstLayout from "../components/common/FirstLayout"
-import LandingScreen from "../pages/auth/LandingScreen"
+import LandingScreen from "../pages/auth/LandinScreen"
 import Error from "../error/Error"
 import Layout from "../components/common/Layout"
 import MainScreen from "../pages/screen/MainScreen"

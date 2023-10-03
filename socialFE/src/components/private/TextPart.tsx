@@ -40,7 +40,7 @@ const TextPart = () => {
                 <MdOutlinePublic className="z-[-20]" />
                 <BsFillCaretDownFill className="ml-1 mt-[2px] text-xs z-[-20]" />
                 {view ? (
-                  <div className="absolute bg-gray-500 text-white rounded-md flex flex-col mt-[90px] text-[10px] ">
+                  <div className="absolute bg-gray-500 text-white rounded-md flex flex-col mt-[90px] text-[10px] z-[-10]">
                     <div className="px-3 hover:scale-110 duration-300 transition-all">
                       Public
                     </div>

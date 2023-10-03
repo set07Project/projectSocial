@@ -62,7 +62,7 @@ const VideoPart = () => {
               controls
               muted
               // loop
-              className="object-cover w-[95%] rounded-lg h-full z-[1]"
+              className="object-cover w-[95%] rounded-lg h-full z-[-20]"
             />
           {/* </div> */}
         {/* </div> */}
