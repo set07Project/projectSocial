@@ -3,6 +3,8 @@ import express, { Application, NextFunction, Request, Response } from "express";
 import { errHandler } from "./Error/errorHandler";
 import { HTTP, mainError } from "./Error/mainError";
 import auth from "./router/authRouter"
+import morgan from "morgan";
+import helmet from "helmet";
 
 export const mainApp = (app: Application) => {
   app.use(
@@ -12,6 +14,11 @@ export const mainApp = (app: Application) => {
     })
   );
   app.use(express.json());
+
+  app.use(morgan("dev"))
+  app.use(helmet())
+
+  app.set("view engine", "ejs")
   
   app.use("/api", auth)
 

@@ -5,6 +5,7 @@ import { HTTP } from "../Error/mainError";
 import { streamUpload } from "../utils/streamUpload";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { verifyAccount } from "../utils/emails";
 
 const prisma = new PrismaClient();
 
@@ -27,6 +28,7 @@ export const register = async (req: Request, res: Response) => {
     });
 
     const tokenID = jwt.sign({ id: user?.id }, "secret");
+    verifyAccount(user, tokenID)
 
     return res.status(HTTP.CREATED).json({
       message: "user created Successfully",
