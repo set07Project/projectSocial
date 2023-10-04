@@ -15,6 +15,7 @@ const Profile = () => {
         {/* <div className="max-h-[460px] w-[290px] max-sm:hidden mr-11 "> */}
         <div className="max-sm:hidden max-md:hidden h-full ">
           <Blog />
+          
           <Blog stick="sticky top-[90px] z-[-50]" />
         </div>
         {/* </div> */}
