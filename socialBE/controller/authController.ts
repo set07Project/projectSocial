@@ -5,7 +5,7 @@ import { HTTP } from "../Error/mainError";
 import { streamUpload } from "../utils/streamUpload";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { verifyAccount } from "../utils/emails";
+import { sendMail, resetPassword } from "../utils/emails";
 
 const prisma = new PrismaClient();
 
@@ -28,7 +28,7 @@ export const register = async (req: Request, res: Response) => {
     });
 
     const tokenID = jwt.sign({ id: user?.id }, "secret");
-    verifyAccount(user, tokenID).then(()=>{
+    sendMail(user, tokenID).then(()=>{
       console.log("sent");
     })
 
@@ -63,9 +63,17 @@ export const allUsers = async (req: Request, res: Response) => {
 
 export const oneUser = async (req: Request, res: Response) => {
   try {
-    const { userID } = req.params;
+    const { token } = req.params;
+
+    const userID : any = jwt.verify(token, "secret", (err, payload: any)=>{
+      if (err) {
+        return err
+      } else {
+        return payload
+      }
+    })
     const user = await prisma.authModel.findUnique({
-      where: { id: userID },
+      where: { id: userID?.id },
     });
 
     return res.status(HTTP.OK).json({
@@ -184,6 +192,9 @@ export const forgotPassword = async (req: any, res: Response) => {
 
     if (user?.verified && user?.token === "") {
       const token = jwt.sign({ id: user?.id }, "secret");
+
+      const tokenID : string = token
+      resetPassword(user, tokenID)
 
       const verify = await prisma.authModel.update({
         where: { id: user?.id },

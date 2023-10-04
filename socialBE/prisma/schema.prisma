@@ -39,5 +39,31 @@ model postModel {
   userID String
   user authModel @relation(fields: [userID], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
+  comments commentModel[]
+
+  createdAt DateTime @default(now())
+}
+
+model commentModel {
+  id String @id @default(uuid())
+
+  comment String
+
+  postID String
+  post postModel @relation(fields: [postID], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  replies replyModel[]
+
+  createdAt DateTime @default(now())
+}
+
+model replyModel {
+  id String @id @default(uuid())
+
+  reply String
+
+  commentID String
+  comment commentModel @relation(fields: [commentID], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
   createdAt DateTime @default(now())
 }
