@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { MdOutlinePublic } from "react-icons/md";
 import { BsFillCaretDownFill } from "react-icons/bs";
-import video from "../../assets/video.mp4";
+import Video from "../../assets/video.mp4";
 import Add from "./Add";
 import Comment from "./Comment";
 
@@ -34,9 +34,9 @@ const VideoPart = () => {
                 }}
               >
                 <MdOutlinePublic className="z-[-20]" />
-                <BsFillCaretDownFill className="ml-1 mt-[3px] text-xs z-[-20]" />
+                <BsFillCaretDownFill className="ml-1 mt-[3px] text-xs z-[-10]" />
                 {view ? (
-                  <div className="absolute bg-gray-500 text-white rounded-md flex flex-col mt-[90px] text-[10px] z-[-10]">
+                  <div className="absolute bg-gray-500 text-white rounded-md flex flex-col mt-[90px] text-[10px] z-[30]">
                     <div className="px-3 hover:scale-110 duration-300 transition-all">
                       Public
                     </div>
@@ -53,19 +53,16 @@ const VideoPart = () => {
           </div>
         </div>
       </div>
-      
-      <div className="mt-5 w-full justify-center flex h-auto">
-        {/* <div className="w-[95%] h-[270px] max-sm:h-[200px] border rounded-md z-[-20] flex justify-center items-center overflow-hidden"> */}
-          {/* <div className=" z-[-20] w-full h-full flex justify-end bg-black"> */}
-            <video
-              src={video}
-              controls
-              muted
-              // loop
-              className="object-cover w-[95%] rounded-lg h-full z-[-20]"
-            />
-          {/* </div> */}
-        {/* </div> */}
+
+      <div className="mt-5 w-full justify-center flex h-auto z-[20]">
+        <video
+          src={Video}
+          controls
+          muted
+          // loop
+          // autoPlay
+          className="object-cover w-[95%] rounded-lg h-full "
+        />
       </div>
       <Add />
       <Comment />
