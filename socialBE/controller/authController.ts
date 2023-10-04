@@ -28,7 +28,9 @@ export const register = async (req: Request, res: Response) => {
     });
 
     const tokenID = jwt.sign({ id: user?.id }, "secret");
-    verifyAccount(user, tokenID)
+    verifyAccount(user, tokenID).then(()=>{
+      console.log("sent");
+    })
 
     return res.status(HTTP.CREATED).json({
       message: "user created Successfully",
@@ -80,17 +82,18 @@ export const oneUser = async (req: Request, res: Response) => {
 
 export const deleteUser = async (req: Request, res: Response) => {
   try {
-    const { token } = req.params;
+    const { userID } = req.params;
+    // const { token } = req.params;
     
-    const userID : any = jwt.verify(token, "secret", (err, payload : any)=>{
-        if (err) {
-            return err
-        } else {
-            return payload
-        }
-    })
+    // const userID : any = jwt.verify(token, "secret", (err, payload : any)=>{
+    //     if (err) {
+    //         return err
+    //     } else {
+    //         return payload
+    //     }
+    // })
     const user = await prisma.authModel.delete({
-      where: { id: userID?.id},
+      where: { id: userID}
     });
 
     return res.status(HTTP.OK).json({
