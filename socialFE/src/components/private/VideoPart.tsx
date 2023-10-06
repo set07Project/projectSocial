@@ -6,6 +6,11 @@ import Add from "./Add";
 import Comment from "./Comment";
 
 const VideoPart = () => {
+  const [control, setControl] = useState<boolean>(false);
+  const onControl = () => {
+    setControl(!control);
+  };
+
   const [view, setView] = useState<boolean>(false);
   const onView = () => {
     setView(!view);
@@ -57,12 +62,14 @@ const VideoPart = () => {
       <div className="mt-5 w-full justify-center flex h-auto z-[20]">
         <video
           src={Video}
-          controls
+          controls={control}
           muted
           // loop
           // autoPlay
           className="object-cover w-[95%] rounded-lg h-full "
-        />
+        onClick={() => {
+          setControl(control)
+        }} onMouseLeave={onControl} onMouseEnter={onControl}/>
       </div>
       <Add />
       <Comment />

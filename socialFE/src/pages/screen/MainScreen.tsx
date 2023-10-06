@@ -1,13 +1,17 @@
+import { useState } from "react";
 import Blog from "../../components/private/Blog";
 import ImagePart from "../../components/private/ImagePart";
 import Mind from "../../components/private/Mind";
 import TextPart from "../../components/private/TextPart";
 import VideoPart from "../../components/private/VideoPart";
 import {FiSearch} from "react-icons/fi"
+import TogglePage from "./TogglePage";
 
 const MainScreen = () => {
+  const [toggle, setToggle] = useState<boolean>(false)
   return (
-    <div className="w-full h-[100%] mt-[68px]  max-sm:w-full ">
+    <div className="w-full h-[100%] mt-[68px]  max-sm:w-full overflow-hidden">
+      {toggle && <TogglePage/>}
       <div className="w-full h-full justify-between  flex ">
         <div className="max-sm:hidden max-md:hidden h-full ">
           <Blog />

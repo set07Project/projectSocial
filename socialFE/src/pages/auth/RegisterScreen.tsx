@@ -40,7 +40,7 @@ const RegisterScreen = () => {
     myForms.append("name", name);
     myForms.append("email", email);
     myForms.append("password", password);
-    myForms.append("image", image);
+    myForms.append("image", avatar);
 
     console.log(data);
     navigate("/chat");
@@ -57,7 +57,7 @@ const RegisterScreen = () => {
           <img
             src={avatar ? avatar : image}
             alt=""
-            className="w-full h-full object-cover overflow-hidden rounded-[50%] max-sm:w-full max-sm:h-full max-sm:rounded-[50%]"
+            className="w-[100px] h-[100px] object-cover overflow-hidden rounded-[50%] max-sm:w-full max-sm:h-full max-sm:rounded-[50%]"
           />
           <input
             type="file"
