@@ -22,7 +22,7 @@ const Header = () => {
   return (
     <div>
       {scroll ? (
-        <div className="bg-gray-100 w-full shadow-md transition-all duration-500 z-100">
+        <div className="bg-gray-100 w-full transition-all duration-500 z-100">
           <div className="flex justify-between px-[35px] py-4 w-full  max-sm:w-full max-sm:justify-between">
             {/* {logo side} */}
             <div className="leading-4 italic max-sm:text-[12px]">

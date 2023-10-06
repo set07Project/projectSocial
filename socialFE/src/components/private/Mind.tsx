@@ -1,22 +1,25 @@
 import { BsFillCameraFill, BsPencilSquare } from "react-icons/bs";
 import { FaVideo } from "react-icons/fa";
 import { useDispatch } from "react-redux";
-// import { useSelector } from "react-redux";
-// import { toggleState } from "../../global/GlobalFile";
+import { useSelector } from "react-redux";
+import { toggleState } from "../../global/GlobalFile";
 import TogglePage from "../../pages/screen/TogglePage";
-import { useState } from "react";
+// import { useState } from "react";
 
 const Mind = () => {
-  // const dispatch = useDispatch();
-  // const toggle = useSelector((state: any) => state.toggle);
+  const dispatch = useDispatch();
+  const toggle = useSelector((state: any) => state.toggle);
   // const onTogglestate = () => {
-  //   dispatch(toggleState(!toggle));
+  //   dispatch(toggleState());
   // };
-  const [loading, setLoading] = useState<boolean>(false);
+  // const [loading, setLoading] = useState<boolean>(false);
+//  console.log(toggle)
 
   return (
     <div className="overflow-hidden">
-      {loading && <TogglePage />}
+      {
+      toggle? <TogglePage/> : null
+      }
       <div className="px-[20px] text-3xl font-black text-black max-sm:text-xs ">
         Activity Feed
       </div>
@@ -43,12 +46,9 @@ const Mind = () => {
             <div>
               <FaVideo className="text-lg mr-[15px] cursor-pointer" />
             </div>
-            <div
-              onClick={() => {
-                setLoading(true);
-              }}
-              className=""
-            >
+            <div onClick={()=>{
+              dispatch(toggleState())
+            }}>
               <BsPencilSquare className="text-lg mr-[15px] cursor-pointer " />
             </div>
           </div>
