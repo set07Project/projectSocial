@@ -38,7 +38,7 @@ const Sider = () => {
     setStore(!store);
   };
   return (
-    <div className="max-sm:hidden flex bg-[#F3F4F6] flex-col justify-center h-screen px-4 fixed z-30 shadow-lg ">
+    <div className="max-sm:hidden hidden flex bg-[#F3F4F6] flex-col justify-center h-screen px-4 fixed z-30 shadow-lg ">
       <div className="flex flex-col items-center h-[75%] w-[30px]  justify-between">
         <Link to="/chat/profile">
           <div

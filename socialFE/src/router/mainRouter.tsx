@@ -13,6 +13,7 @@ import Ads from "../pages/screen/Ads";
 import RegisterScreen from "../pages/auth/RegisterScreen";
 import SigninScreen from "../pages/auth/SigninScreen";
 import PrivateRouter from "./PrivateRouter";
+import Error from "../error/Error";
 
 export const mainRouter = createBrowserRouter([
   {
@@ -28,9 +29,9 @@ export const mainRouter = createBrowserRouter([
   {
     path: "/chat",
     element: (
-      <PrivateRouter>
-        <Layout />
-    //   </PrivateRouter>
+      //   <PrivateRouter>
+      <Layout />
+      //   </PrivateRouter>
     ),
     children: [
       {
@@ -62,6 +63,10 @@ export const mainRouter = createBrowserRouter([
         element: <Store />,
       },
     ],
+  },
+  {
+    path: "*",
+    element: <Error />,
   },
   {
     path: "/sign-up",
