@@ -1,210 +1,252 @@
 import { PrismaClient } from "@prisma/client";
 import { Request, Response } from "express";
-import {HTTP} from "../Error/mainError"
+import { HTTP } from "../Error/mainError";
 import { streamUpload } from "../utils/streamUpload";
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
-export const createPost = async(req : any, res : Response) =>{
-    try {
-        const {userID} = req.params
-        const {message} = req.body
+export const createPost = async (req: any, res: Response) => {
+  try {
+    const { userID } = req.params;
+    const { message } = req.body;
 
-        const user = await prisma.authModel.findUnique({
-        where : {id : userID},
-        include : {posts : true}
-        })
+    const user = await prisma.authModel.findUnique({
+      where: { id: userID },
+      include: { posts: true },
+    });
 
-        const {secure_url, public_id} : any= await streamUpload(req)
+    const { secure_url, public_id }: any = await streamUpload(req);
 
-        if (user) {
-            const post = await prisma.postModel.create({
-                data : {
-                    message, userID, image : secure_url, imageID : public_id,
-                }
-            })
+    if (user) {
+      const post = await prisma.postModel.create({
+        data: {
+          message,
+          userID,
+          image: secure_url,
+          imageID: public_id,
+        },
+      });
 
-            user?.posts.push(post)
-            
-            return res.status(HTTP.CREATED).json({
-                message : "Post created successfully",
-                data : user?.posts
-            })
+      user?.posts.push(post);
 
-        } else {
-            return res.status(HTTP.BAD).json({
-                message : "User Not Found"
-            })
-            
-        }
-
-    } catch (error : any) {
-        return res.status(HTTP.BAD).json({
-            message : "Error creating post",
-            data : error.message
-        })
+      return res.status(HTTP.CREATED).json({
+        message: "Post created successfully",
+        data: user?.posts,
+      });
+    } else {
+      return res.status(HTTP.BAD).json({
+        message: "User Not Found",
+      });
     }
-}
+  } catch (error: any) {
+    return res.status(HTTP.BAD).json({
+      message: "Error creating post",
+      data: error.message,
+    });
+  }
+};
 
-export const allPosts = async(req : any, res : Response) =>{
-    try {
-        const {userID} = req.params
+export const allPosts = async (req: any, res: Response) => {
+  try {
+    const { userID } = req.params;
 
-        const user = await prisma.authModel.findUnique({
-        where : {id : userID}
-        })
+    const user = await prisma.authModel.findUnique({
+      where: { id: userID },
+    });
 
-        if (user) {
-            const post = await prisma.postModel.findMany({})
+    if (user) {
+      const post = await prisma.postModel.findMany({});
 
-            
-            return res.status(HTTP.OK).json({
-                message : "Posts viewed successfully",
-                data : post
-            })
-
-        } else {
-            return res.status(HTTP.BAD).json({
-                message : "User Not Found"
-            })
-            
-        }
-
-    } catch (error : any) {
-        return res.status(HTTP.BAD).json({
-            message : "Error creating post",
-            data : error.message
-        })
+      return res.status(HTTP.OK).json({
+        message: "Posts viewed successfully",
+        data: post,
+      });
+    } else {
+      return res.status(HTTP.BAD).json({
+        message: "User Not Found",
+      });
     }
-}
+  } catch (error: any) {
+    return res.status(HTTP.BAD).json({
+      message: "Error creating post",
+      data: error.message,
+    });
+  }
+};
 
-export const onePost = async(req : any, res : Response) =>{
-    try {
-        const {postID, userID} = req.params
+export const onePost = async (req: any, res: Response) => {
+  try {
+    const { postID, userID } = req.params;
 
-        const user = await prisma.authModel.findUnique({
-        where : {id : userID}
-        })
+    const user = await prisma.authModel.findUnique({
+      where: { id: userID },
+    });
 
-        if (user) {
-            const post = await prisma.postModel.findUnique({
-                where : {id : postID},
+    if (user) {
+      const post = await prisma.postModel.findUnique({
+        where: { id: postID },
+      });
 
-            })
-
-            return res.status(HTTP.OK).json({
-                message : "Post viewed successfully",
-                data : post
-            })
-
-        } else {
-            return res.status(HTTP.BAD).json({
-                message : "User Not Found"
-            })
-            
-        }
-
-    } catch (error : any) {
-        return res.status(HTTP.BAD).json({
-            message : "Error creating post",
-            data : error.message
-        })
+      return res.status(HTTP.OK).json({
+        message: "Post viewed successfully",
+        data: post,
+      });
+    } else {
+      return res.status(HTTP.BAD).json({
+        message: "User Not Found",
+      });
     }
-}
+  } catch (error: any) {
+    return res.status(HTTP.BAD).json({
+      message: "Error creating post",
+      data: error.message,
+    });
+  }
+};
 
-export const deletePost = async(req : any, res : Response) =>{
-    try {
-        const {postID, userID} = req.params
+export const deletePost = async (req: any, res: Response) => {
+  try {
+    const { postID, userID } = req.params;
 
-        const user = await prisma.authModel.findUnique({
-        where : {id : userID}
-        })
+    const user = await prisma.authModel.findUnique({
+      where: { id: userID },
+    });
 
-        if (user) {
-            const post = await prisma.postModel.findUnique({
-                where : {id : postID}
-            })
+    if (user) {
+      const post = await prisma.postModel.findUnique({
+        where: { id: postID },
+      });
 
-            if (user?.id === post?.userID) {
+      if (user?.id === post?.userID) {
+        const posted = await prisma.postModel.delete({
+          where: { id: postID },
+        });
 
-                const posted = await prisma.postModel.delete({
-                    where : {id : postID},
-    
-                })
-
-                return res.status(HTTP.OK).json({
-                message : "Post deleted successfully",
-                data : posted
-            })
-
-            } else {
-                return res.status(HTTP.BAD).json({
-                message : "Ure not Authorized to delete"
-            })
-            }
-
-        } else {
-            return res.status(HTTP.BAD).json({
-                message : "User Not Found"
-            })
-            
-        }
-
-    } catch (error : any) {
+        return res.status(HTTP.OK).json({
+          message: "Post deleted successfully",
+          data: posted,
+        });
+      } else {
         return res.status(HTTP.BAD).json({
-            message : "Error creating post",
-            data : error.message
-        })
+          message: "Ure not Authorized to delete",
+        });
+      }
+    } else {
+      return res.status(HTTP.BAD).json({
+        message: "User Not Found",
+      });
     }
-}
-export const updatePost = async(req : any, res : Response) =>{
-    try {
-        const {postID, userID} = req.params
-        const {message} = req.body
+  } catch (error: any) {
+    return res.status(HTTP.BAD).json({
+      message: "Error creating post",
+      data: error.message,
+    });
+  }
+};
+export const updatePost = async (req: any, res: Response) => {
+  try {
+    const { postID, userID } = req.params;
+    const { message } = req.body;
 
-        const user = await prisma.authModel.findUnique({
-        where : {id : userID},
-        include : {posts : true}
-        })
+    const user = await prisma.authModel.findUnique({
+      where: { id: userID },
+      include: { posts: true },
+    });
 
-        const {secure_url, public_url} : any= await streamUpload(req)
+    const { secure_url, public_url }: any = await streamUpload(req);
 
-        if (user) {
-            const post = await prisma.postModel.findUnique({
-                where : {id : postID}
-            })
+    if (user) {
+      const post = await prisma.postModel.findUnique({
+        where: { id: postID },
+      });
 
-            if (user?.id === post?.userID) {
+      if (user?.id === post?.userID) {
+        const posted = await prisma.postModel.update({
+          where: { id: postID },
+          data: {
+            message,
+            userID,
+            image: secure_url,
+            imageID: public_url,
+          },
+        });
 
-                const posted = await prisma.postModel.update({
-                    where : {id : postID},
-                    data : {
-                        message, userID, image : secure_url, imageID : public_url,
-                    }
-                })
-
-                return res.status(HTTP.OK).json({
-                message : "Post updated successfully",
-                data : posted
-            })
-
-            } else {
-                return res.status(HTTP.BAD).json({
-                message : "Ure not Authorized to delete"
-            })
-            }
-
-        } else {
-            return res.status(HTTP.BAD).json({
-                message : "User Not Found"
-            })
-            
-        }
-
-    } catch (error : any) {
+        return res.status(HTTP.OK).json({
+          message: "Post updated successfully",
+          data: posted,
+        });
+      } else {
         return res.status(HTTP.BAD).json({
-            message : "Error creating post",
-            data : error.message
-        })
+          message: "Ure not Authorized to delete",
+        });
+      }
+    } else {
+      return res.status(HTTP.BAD).json({
+        message: "User Not Found",
+      });
     }
-}
+  } catch (error: any) {
+    return res.status(HTTP.BAD).json({
+      message: "Error creating post",
+      data: error.message,
+    });
+  }
+};
+
+export const likePost = async (req: Request, res: Response) => {
+  try {
+    const { userId, postId } = req.params;
+    const user : any = await prisma.authModel.findUnique({
+      where: { id: userId },
+    });
+    const post : any = await prisma.postModel.findUnique({
+      where: { id: postId },
+    });
+    if (user) {
+      post.likes.push(userId);
+      post.save()
+      return res.status(200).json({
+        message: "Liked Post Successfully",
+        data: post,
+      });
+    } else {
+      return res.status(400).json({
+        message: "User Not Found",
+      });
+    }
+  } catch (error) {
+    return res.status(400).json({
+      message: "Error Liking Post",
+      data: error,
+    });
+  }
+};
+
+export const unLikePost = async (req: Request, res: Response) => {
+  try {
+    const { userId, postId } = req.params;
+    const user : any = await prisma.authModel.findUnique({
+      where: { id: userId },
+    });
+    const post : any = await prisma.postModel.findUnique({
+      where: { id: postId },
+    });
+    if (user) {
+      post.likes.pull(userId);
+      post.save()
+      return res.status(200).json({
+        message: "UnLiked Post Successfully",
+        data: post,
+      });
+    } else {
+      return res.status(400).json({
+        message: "User Not Found",
+      });
+    }
+  } catch (error) {
+    return res.status(400).json({
+      message: "Error UnLiking Post",
+      data: error,
+    });
+  }
+};

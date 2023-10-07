@@ -22,7 +22,7 @@ export const mainRouter = createBrowserRouter([
             {
                 index: true,
                 element: <LandingScreen/>
-            }
+            },
         ]
     },
     {

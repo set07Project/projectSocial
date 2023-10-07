@@ -11,7 +11,7 @@ mainApp(app)
 const server = app.listen(port, ()=>{
     console.log("connected", port);
     
-})
+});
 
 process.on("uncaughtException", (err : any)=>{
     console.log("server is shutting doen due to uncaughtException");
